@@ -1,0 +1,76 @@
+backend:
+  name: github
+  repo: AranaXC/astro-blog-starter-template
+  branch: main
+
+local_backend: true
+publish_mode: editorial_workflow
+media_folder: public/uploads
+public_folder: /uploads
+site_url: https://www.8vista.com
+display_url: https://www.8vista.com
+logo_url: /favicon.svg
+locale: zh_Hans
+
+collections:
+  - name: site
+    label: 站点页面
+    files:
+      - name: home
+        label: 首页
+        file: src/data/home.json
+        format: json
+        fields:
+          - { label: 顶部标签, name: eyebrow, widget: string }
+          - { label: 主标题, name: title, widget: string }
+          - { label: 导语, name: lead, widget: text }
+          - { label: 说明, name: note, widget: text }
+          - label: 主按钮
+            name: primaryAction
+            widget: object
+            fields:
+              - { label: 文案, name: label, widget: string }
+              - { label: 链接, name: url, widget: string }
+          - label: 次按钮
+            name: secondaryAction
+            widget: object
+            fields:
+              - { label: 文案, name: label, widget: string }
+              - { label: 链接, name: url, widget: string }
+          - label: 关键点
+            name: stats
+            widget: list
+            fields:
+              - { label: 编号, name: value, widget: string }
+              - { label: 描述, name: label, widget: string }
+          - label: 内容板块
+            name: sections
+            widget: list
+            fields:
+              - { label: 标题, name: title, widget: string }
+              - { label: 内容, name: text, widget: text }
+      - name: about
+        label: 关于页面
+        file: src/content/site/about.md
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 描述, name: description, widget: text }
+          - { label: 头图, name: heroImage, widget: image, required: false }
+          - { label: 正文, name: body, widget: markdown }
+
+  - name: blog
+    label: 文章
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    editor:
+      preview: false
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 描述, name: description, widget: text }
+      - { label: 发布日期, name: pubDate, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: 更新日期, name: updatedDate, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+      - { label: 头图, name: heroImage, widget: image, required: false }
+      - { label: 正文, name: body, widget: markdown }
